@@ -1,0 +1,2 @@
+rootProject.name='Gilinho Baking App'
+include ':app'
