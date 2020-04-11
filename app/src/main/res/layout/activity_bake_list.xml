@@ -25,6 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <include layout="@layout/content_bake_list" />
+        <include layout="@layout/activity_bake_list_container" />
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

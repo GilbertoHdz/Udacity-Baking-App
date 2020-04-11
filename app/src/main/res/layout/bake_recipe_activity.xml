@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".features.masterdetail.MasterDetailActivity">
+    tools:context=".features.bakerecipe.BakeRecipeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -27,6 +27,6 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/item_list" />
+        <include layout="@layout/bake_recipe_item_list" />
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

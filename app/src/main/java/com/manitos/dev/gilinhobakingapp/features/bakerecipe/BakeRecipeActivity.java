@@ -1,4 +1,4 @@
-package com.manitos.dev.gilinhobakingapp.features.masterdetail;
+package com.manitos.dev.gilinhobakingapp.features.bakerecipe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +31,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class MasterDetailActivity extends AppCompatActivity {
+public class BakeRecipeActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -42,7 +42,7 @@ public class MasterDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list);
+        setContentView(R.layout.bake_recipe_activity);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,7 +79,7 @@ public class MasterDetailActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final MasterDetailActivity mParentActivity;
+        private final BakeRecipeActivity mParentActivity;
         private final List<DummyContent.DummyItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -104,7 +104,7 @@ public class MasterDetailActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(MasterDetailActivity parent,
+        SimpleItemRecyclerViewAdapter(BakeRecipeActivity parent,
                                       List<DummyContent.DummyItem> items,
                                       boolean twoPane) {
             mValues = items;
@@ -115,7 +115,7 @@ public class MasterDetailActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_content, parent, false);
+                    .inflate(R.layout.bake_recipe_item_list_content, parent, false);
             return new ViewHolder(view);
         }
 

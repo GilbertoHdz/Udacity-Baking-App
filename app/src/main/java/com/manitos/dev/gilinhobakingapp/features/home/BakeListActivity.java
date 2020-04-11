@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.manitos.dev.gilinhobakingapp.R;
 import com.manitos.dev.gilinhobakingapp.dummy.DummyContent;
-import com.manitos.dev.gilinhobakingapp.features.masterdetail.MasterDetailActivity;
+import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class BakeListActivity extends AppCompatActivity {
                 DummyContent.DummyItem item = (DummyContent.DummyItem) v.getTag();
 
                 Context context = v.getContext();
-                Intent intent = new Intent(context, MasterDetailActivity.class);
+                Intent intent = new Intent(context, BakeRecipeActivity.class);
                 // intent.putExtra(BakeContainerFragment.ARG_ITEM_ID, item.id);
 
                 context.startActivity(intent);
@@ -68,7 +68,7 @@ public class BakeListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_bake_content, parent, false);
+                    .inflate(R.layout.activity_bake_list_container_item, parent, false);
 
             return new ViewHolder(view);
         }

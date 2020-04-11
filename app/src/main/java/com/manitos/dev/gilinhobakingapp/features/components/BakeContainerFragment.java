@@ -15,11 +15,11 @@ import android.widget.TextView;
 import com.manitos.dev.gilinhobakingapp.R;
 import com.manitos.dev.gilinhobakingapp.dummy.DummyContent;
 import com.manitos.dev.gilinhobakingapp.features.bakedetail.BakeDetailActivity;
-import com.manitos.dev.gilinhobakingapp.features.masterdetail.MasterDetailActivity;
+import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
 
 /**
  * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link MasterDetailActivity}
+ * This fragment is either contained in a {@link BakeRecipeActivity}
  * in two-pane mode (on tablets) or a {@link BakeDetailActivity}
  * on handsets.
  */
@@ -63,7 +63,7 @@ public class BakeContainerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_detail, container, false);
+        View rootView = inflater.inflate(R.layout.component_bake_container, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {

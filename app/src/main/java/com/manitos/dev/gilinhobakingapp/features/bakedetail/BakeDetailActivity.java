@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.manitos.dev.gilinhobakingapp.features.components.BakeContainerFragment;
 import com.manitos.dev.gilinhobakingapp.R;
-import com.manitos.dev.gilinhobakingapp.features.masterdetail.MasterDetailActivity;
+import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,14 +18,14 @@ import android.view.MenuItem;
  * An activity representing a single Item detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link MasterDetailActivity}.
+ * in a {@link BakeRecipeActivity}.
  */
 public class BakeDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_detail);
+        setContentView(R.layout.bake_detail_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,7 +68,7 @@ public class BakeDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, MasterDetailActivity.class));
+            navigateUpTo(new Intent(this, BakeRecipeActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -5,4 +5,4 @@
     android:id="@+id/recycler_bake_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:listitem="@layout/item_bake_content" />
+    tools:listitem="@layout/activity_bake_list_container_item" />

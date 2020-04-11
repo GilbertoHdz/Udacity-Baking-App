@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".features.masterdetail.MasterDetailActivity"
+            android:name=".features.bakerecipe.BakeRecipeActivity"
             android:label="@string/app_name"
             android:parentActivityName=".features.home.BakeListActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -34,11 +34,11 @@
         <activity
             android:name=".features.bakedetail.BakeDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".features.masterdetail.MasterDetailActivity"
+            android:parentActivityName=".features.bakerecipe.BakeRecipeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.manitos.dev.gilinhobakingapp.features.masterdetail.MasterDetailActivity" />
+                android:value="com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity" />
         </activity>
     </application>
 </manifest>
