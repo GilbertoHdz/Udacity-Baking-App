@@ -3,9 +3,13 @@ package com.manitos.dev.gilinhobakingapp.features.bakedetail;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.manitos.dev.gilinhobakingapp.features.components.BakeContainerFragment;
+import com.manitos.dev.gilinhobakingapp.api.models.Ingredient;
+import com.manitos.dev.gilinhobakingapp.api.models.Step;
+import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeUiItems;
+import com.manitos.dev.gilinhobakingapp.features.components.BakeIngredientsFragment;
 import com.manitos.dev.gilinhobakingapp.R;
 import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
+import com.manitos.dev.gilinhobakingapp.features.components.BakeStepFragment;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -13,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
+
+import java.util.List;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -45,17 +51,28 @@ public class BakeDetailActivity extends AppCompatActivity {
         // http://developer.android.com/guide/components/fragments.html
         //
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(BakeContainerFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(BakeContainerFragment.ARG_ITEM_ID));
-            BakeContainerFragment fragment = new BakeContainerFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.item_detail_container, fragment)
-                    .commit();
+            Intent intent = getIntent();
+
+            if (intent.hasExtra(BakeIngredientsFragment.ARG_INGREDIENTS)) {
+                showIngredientsScreen((BakeUiItems) intent.getSerializableExtra(BakeIngredientsFragment.ARG_INGREDIENTS));
+            } else if (intent.hasExtra(BakeStepFragment.ARG_STEP)) {
+                showStepScreen((Step) intent.getSerializableExtra(BakeStepFragment.ARG_STEP));
+            } else {
+                throw new IllegalArgumentException("the params shouldn't be null");
+            }
         }
+    }
+
+    private void showStepScreen(Step step) {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.item_detail_container, BakeStepFragment.newInstance(step))
+                .commit();
+    }
+
+    private void showIngredientsScreen(BakeUiItems bakeItem) {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.item_detail_container, BakeIngredientsFragment.newInstance(bakeItem))
+                .commit();
     }
 
     @Override

@@ -51,8 +51,6 @@ public class MainViewModel extends AndroidViewModel {
                 }
             }
         });
-
-
     }
 
     public LiveData<List<Bake>> getBakes() {

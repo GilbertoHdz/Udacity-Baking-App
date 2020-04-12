@@ -1,11 +1,13 @@
 package com.manitos.dev.gilinhobakingapp.api.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by gilberto hdz on 11/04/20.
  */
-public class Bake {
+public class Bake implements Serializable {
+
     private Integer id;
     private String name;
     private Integer servings;

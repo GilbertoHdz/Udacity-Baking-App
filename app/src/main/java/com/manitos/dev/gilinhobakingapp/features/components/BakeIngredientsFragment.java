@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.manitos.dev.gilinhobakingapp.R;
+import com.manitos.dev.gilinhobakingapp.api.models.Ingredient;
 import com.manitos.dev.gilinhobakingapp.dummy.DummyContent;
 import com.manitos.dev.gilinhobakingapp.features.bakedetail.BakeDetailActivity;
 import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
+import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeUiItems;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -23,39 +25,46 @@ import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
  * in two-pane mode (on tablets) or a {@link BakeDetailActivity}
  * on handsets.
  */
-public class BakeContainerFragment extends Fragment {
+public class BakeIngredientsFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_INGREDIENTS = "bake.ingredient.arg.ingredients";
 
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private BakeUiItems mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public BakeContainerFragment() {
+    public static BakeIngredientsFragment newInstance(BakeUiItems bakeItem) {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(BakeIngredientsFragment.ARG_INGREDIENTS, bakeItem);
+
+        BakeIngredientsFragment fragment = new BakeIngredientsFragment();
+        fragment.setArguments(arguments);
+
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments().containsKey(ARG_INGREDIENTS)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = (BakeUiItems) getArguments().getSerializable(ARG_INGREDIENTS);
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.getStepType());
             }
         }
     }
@@ -67,7 +76,18 @@ public class BakeContainerFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.details);
+            StringBuilder sb = new StringBuilder();
+            for (Ingredient ingredient: mItem.getIngredients()) {
+                sb
+                        .append(" - ")
+                        .append(ingredient.getIngredient())
+                        .append(" ")
+                        .append(ingredient.getQuantity())
+                        .append(" ")
+                        .append(ingredient.getMeasure())
+                        .append("\n");
+            }
+            ((TextView) rootView.findViewById(R.id.item_detail)).setText(sb);
         }
 
         return rootView;

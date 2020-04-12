@@ -1,9 +1,11 @@
 package com.manitos.dev.gilinhobakingapp.api.models;
 
+import java.io.Serializable;
+
 /**
  * Created by gilberto hdz on 11/04/20.
  */
-public class Ingredient {
+public class Ingredient implements Serializable {
 
     private Double quantity;
     private String measure;

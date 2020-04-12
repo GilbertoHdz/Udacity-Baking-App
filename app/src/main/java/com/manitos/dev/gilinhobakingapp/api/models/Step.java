@@ -1,9 +1,11 @@
 package com.manitos.dev.gilinhobakingapp.api.models;
 
+import java.io.Serializable;
+
 /**
  * Created by gilberto hdz on 11/04/20.
  */
-public class Step {
+public class Step implements Serializable {
 
     private Integer id;
     private String shortDescription;

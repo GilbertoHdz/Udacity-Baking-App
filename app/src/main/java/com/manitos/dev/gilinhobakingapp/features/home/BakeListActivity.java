@@ -28,6 +28,8 @@ public class BakeListActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;
 
+    public static final String BAKE_KEY = "Bake.List.Activity.bake.item";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +71,7 @@ public class BakeListActivity extends AppCompatActivity {
 
                 Context context = v.getContext();
                 Intent intent = new Intent(context, BakeRecipeActivity.class);
-                // intent.putExtra(BakeContainerFragment.ARG_ITEM_ID, item.id);
+                intent.putExtra(BAKE_KEY, item);
 
                 context.startActivity(intent);
             }
