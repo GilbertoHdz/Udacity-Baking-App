@@ -11,6 +11,7 @@ import com.manitos.dev.gilinhobakingapp.R;
 import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
 import com.manitos.dev.gilinhobakingapp.features.components.BakeStepFragment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,7 @@ public class BakeDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bake_detail_activity);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Show the Up button in the action bar.
@@ -63,6 +64,25 @@ public class BakeDetailActivity extends AppCompatActivity {
         }
     }
 
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(BakeIngredientsFragment.ARG_INGREDIENTS)) {
+            outState.putSerializable(BakeIngredientsFragment.ARG_INGREDIENTS, intent.getSerializableExtra(BakeIngredientsFragment.ARG_INGREDIENTS));
+        }
+
+        if (intent.hasExtra(BakeStepFragment.ARG_STEP)) {
+            outState.putSerializable(BakeStepFragment.ARG_STEP, intent.getSerializableExtra(BakeStepFragment.ARG_STEP));
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void showStepScreen(Step step) {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.item_detail_container, BakeStepFragment.newInstance(step))
@@ -75,19 +95,4 @@ public class BakeDetailActivity extends AppCompatActivity {
                 .commit();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(new Intent(this, BakeRecipeActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

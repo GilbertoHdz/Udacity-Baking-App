@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Gilinho Baking App</string>
+    <string name="bake_recipe_title">Bake Recipe</string>
     <string name="title_item_detail">Item Detail</string>
-    <string name="title_activity_bake_list">BakeListActivity</string>
+    <string name="title_activity_bake_list">Baking App</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -89,8 +89,19 @@ public class BakeRecipeActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(BakeListActivity.BAKE_KEY, _bakeItem);
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         ArrayList<BakeUiItems> items = new ArrayList<>(_bakeItem.getSteps().size() + 1);
         items.add(new BakeUiItems("Ingredients", _bakeItem.getIngredients(), null));
         for (Step step : _bakeItem.getSteps()) {
@@ -98,6 +109,17 @@ public class BakeRecipeActivity extends AppCompatActivity {
         }
 
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, items, mTwoPane));
+
+        if (mTwoPane) {
+            initializeIntroIfIsMaster(items.get(0));
+        }
+    }
+
+    private void initializeIntroIfIsMaster(BakeUiItems items) {
+        Fragment fragment = BakeIngredientsFragment.newInstance(items);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.item_detail_container, fragment)
+                .commit();
     }
 
     public static class SimpleItemRecyclerViewAdapter
