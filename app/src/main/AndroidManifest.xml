@@ -13,6 +13,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <receiver android:name=".features.widget.BakeAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/bake_app_widget_info" />
+        </receiver>
+
+        <!-- 2. The service that will send our collection data to our widget. It needs the
+                permission android.permission.BIND_REMOTEVIEWS -->
+        <service
+            android:name=".features.widget.BakeAppWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity android:name=".features.widget.BakeAppWidgetConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".features.home.BakeListActivity"
             android:label="@string/title_activity_bake_list"
@@ -23,7 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".features.bakerecipe.BakeRecipeActivity"
             android:label="@string/bake_recipe_title"
@@ -33,7 +53,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".features.home.BakeListActivity" />
         </activity>
-
         <activity
             android:name=".features.bakedetail.BakeDetailActivity"
             android:label="@string/title_item_detail"
@@ -44,4 +63,5 @@
                 android:value=".features.bakerecipe.BakeRecipeActivity" />
         </activity>
     </application>
+
 </manifest>
