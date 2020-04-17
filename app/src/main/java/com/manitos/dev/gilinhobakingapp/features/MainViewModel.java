@@ -26,6 +26,12 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<List<Bake>> _mutableBakes = new MutableLiveData<>();
     private LiveData<List<Bake>> _bakes = _mutableBakes;
 
+    private MutableLiveData<Boolean> _mutableHasInternet = new MutableLiveData<>();
+    private LiveData<Boolean> _hasInternet = _mutableHasInternet;
+
+    private MutableLiveData<Boolean> _mutableHasError = new MutableLiveData<>();
+    private LiveData<Boolean> _hasError = _mutableHasError;
+
     public MainViewModel(@NonNull Application application) {
         super(application);
         loadBakesFromServer();
@@ -42,12 +48,16 @@ public class MainViewModel extends AndroidViewModel {
                             try {
                                 URL weatherRequestUrl = NetworkUtils.buildUrl();
                                 String jsonResponse = NetworkUtils.getResponseFromHttpUrl(weatherRequestUrl);
+                                _mutableHasError.postValue(false);
                                 _mutableBakes.postValue(BakeListJsonUtils.getBakeListFromJson(jsonResponse));
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                _mutableHasError.postValue(true);
                             }
                         }
                     });
+                } else {
+                    _mutableHasInternet.postValue(false);
                 }
             }
         });
@@ -55,5 +65,13 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<List<Bake>> getBakes() {
         return _bakes;
+    }
+
+    public LiveData<Boolean> getHasInternet() {
+        return _hasInternet;
+    }
+
+    public LiveData<Boolean> getHasError() {
+        return _hasError;
     }
 }

@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.manitos.dev.gilinhobakingapp.R;
 import com.manitos.dev.gilinhobakingapp.api.models.Bake;
 import com.manitos.dev.gilinhobakingapp.features.MainViewModel;
@@ -31,6 +34,9 @@ public class BakeListActivity extends AppCompatActivity {
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         getBakesObserver();
+
+        observeConnection();
+        observeDataError();
     }
 
     private void getBakesObserver() {
@@ -40,6 +46,28 @@ public class BakeListActivity extends AppCompatActivity {
                 View recyclerView = findViewById(R.id.recycler_bake_list);
                 setupRecyclerView((RecyclerView) recyclerView, bakes);
             }
+        });
+    }
+
+    private void observeConnection() {
+        mainViewModel.getHasInternet().observe(this, hasInternet -> {
+            ProgressBar pg = (ProgressBar) findViewById(R.id.progressBar);
+            pg.setVisibility(View.GONE);
+
+            TextView tv = (TextView) findViewById(R.id.textView);
+            tv.setVisibility(!hasInternet ? View.VISIBLE : View.GONE);
+            tv.setText(R.string.no_internet_connection);
+        });
+    }
+
+    private void observeDataError() {
+        mainViewModel.getHasError().observe(this, hasError -> {
+            ProgressBar pg = (ProgressBar) findViewById(R.id.progressBar);
+            pg.setVisibility(View.GONE);
+
+            TextView tv = (TextView) findViewById(R.id.textView);
+            tv.setVisibility(hasError ? View.VISIBLE : View.GONE);
+            tv.setText(R.string.error_to_load_bakes);
         });
     }
 
