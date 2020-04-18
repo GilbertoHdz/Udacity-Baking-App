@@ -13,11 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.manitos.dev.gilinhobakingapp.R;
 import com.manitos.dev.gilinhobakingapp.api.models.Ingredient;
-import com.manitos.dev.gilinhobakingapp.dummy.DummyContent;
 import com.manitos.dev.gilinhobakingapp.features.bakedetail.BakeDetailActivity;
 import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeRecipeActivity;
 import com.manitos.dev.gilinhobakingapp.features.bakerecipe.BakeUiItems;
